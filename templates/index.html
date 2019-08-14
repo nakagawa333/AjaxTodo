@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <title>Member List</title>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+</head>
+
+<body>
+	<div class="container">
+	<h1>Simple Todo</h1>
+
+	<div class="card w-50">
+		<div class="form-group">
+			<label for="">title</label>
+
+			<input type="text" class="form-control" name="name" id="name">
+		</div>
+
+		<div class="form-group">
+			<label for="">content</label>
+
+			<input type="text" class="form-control" name="email" id="email">
+
+		</div>
+		<div class="form-group">
+			 <button type="submit" class="btn btn-danger" id="add">add</button>
+		</div>
+		</div>
+	</div>
+	</div>
+
+	<div id="body">
+	{% for member in members %}
+	<div class="container">
+	<div id="memberSection{{ member.id }}" class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Member Number: <span id="memberNumber{{ member.id }}">{{ member.random }}</span> </h3>
+        </div>
+
+        <div class="panel-body">
+          <div class="form-inline">
+            <div class="form-group">
+              <label for="nameInput{{ member.id }}">title</label>
+              <input type="text" class="form-control" id="nameInput{{ member.id }}" value="{{ member.name }}">
+            </div>
+
+            <div class="form-group">
+              <label for="emailInput{{ member.id }}">content</label>
+              <input type="email" class="form-control" id="emailInput{{ member.id }}" value="{{ member.email }}">
+            </div>
+
+            <button class="btn btn-primary updateButton" member_id="{{ member.id }}">Update</button>
+
+            <button class="btn btn-primary deleteButton" member_id="{{ member.id }}">Delete</button>
+
+          </div>
+        </div>
+      </div>
+  </div>
+
+	{% endfor %}
+</div>
+
+<script src="http://code.jquery.com/jquery.js"></script>
+ <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+<script src="{{ url_for('static', filename='delete.js') }}"></script>
+<script src="{{ url_for('static', filename='add.js') }}"></script>
+	</body>
+	
+</html>
