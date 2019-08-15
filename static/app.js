@@ -14,10 +14,8 @@ $(function(){
 		})
 
 		.done((data) => {
-			// $('#nameInput'+ member_id).val(data.member_name);  
-			// //$('#memberNumber'+member_id).text(data.member_num);
+            $('#memberSection'+member_id).fadeOut(1000).fadeIn(1000);
             $('#memberNumber'+member_id).text(data.member_num);
-            //alert("Hello");
 		})
 
 		.fail((data) =>{

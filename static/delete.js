@@ -13,6 +13,8 @@ $(function(){
 
 		.done((data) => {
 			$("#memberSection" + member_id).remove();
+			
+			//alert("sucess");
 		})
 
 		.fail(() => {
@@ -20,3 +22,4 @@ $(function(){
 		})
 	})
 })
+
