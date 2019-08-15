@@ -48,8 +48,9 @@ $(function(){
 				$("#db").attr({
 					member_id:member.id
 				});
+			};
 
-				//update
+			//update
 				$(function(){
 					$(".updatebutton").on("click",function(){
 						let member_id = $(this).attr("member_id");
@@ -100,10 +101,7 @@ $(function(){
 						})
 
 					})
-
-
 				})
-			};
 		})
 
 		//データベースに新しいデータを保存出来なかった時
