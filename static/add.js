@@ -20,11 +20,11 @@ $(function(){
 			for(i = 0; i < 1; i++){
 				let member = members[0];
 
-				$("#body").prepend("<div class=container>" + "<div id=memberSection class=panel>" + "<div class=panel-heading>" + "<h3 class=panel-title>" +"Member Number:" + "<span id=memberNumber>" + member.random + "</span>" + "</h3>" +"</div>" 
+				$("#body").prepend("<div class=container>" + "<div id=memberSection class=panel>" + "<div class=panel-heading>" + "<h3 class=panel-title>" +"Member Number:" + "<span id=memberNumber>" + "None" + "</span>" + "</h3>" +"</div>" 
 					 + "<div class=panel-body><div class=form-inline><div class=form-group> <label for=nameInput>title</label><input type=text class=form-control id=nameInput>"
 					 + "<div class=form-group><label for=emailInput>content</label><input type=email class=form-control id=emailInput ></div>"
-					 +"<button class=updateButton id=ub member_id=>Update</button>"
-					 +" <button class=deleteButton id=db member_id=>Delete</button>"
+					 +"<button class=updatebutton id=ub member_id=>Update</button>"
+					 +" <button class=deletebutton id=db member_id=>Delete</button>"
 					+ "</div></div></div></div>");
 
 				$("#nameInput").val(member.name);
@@ -32,8 +32,8 @@ $(function(){
 
 				// $("#membersection")
 				$(".panel").addClass("panel-default");
-				$(".updateButton").addClass("btn btn-primary ");
-				$(".deleteButton").addClass("btn btn-primary ");
+				$(".updatebutton").addClass("btn btn-primary ");
+				$(".deletebutton").addClass("btn btn-primary ");
 
 				$("#memberSection").attr("id","memberSection" + member.id);
 
@@ -51,7 +51,7 @@ $(function(){
 
 				//update
 				$(function(){
-					$(".updateButton").on("click",function(){
+					$(".updatebutton").on("click",function(){
 						let member_id = $(this).attr("member_id");
 
 						let name = $("#nameInput" + member_id).val();
@@ -82,7 +82,7 @@ $(function(){
 
                 //delete
 				$(function(){
-					$(".deleteButton").on("click",function(){
+					$(".deletebutton").on("click",function(){
 						let member_id = $(this).attr("member_id");
 						$.ajax({
 							url:"delete",
@@ -96,7 +96,7 @@ $(function(){
 							$("#memberSection" + member_id).remove();
 						})
 						.fail(() => {
-							alert("deleteError");
+							console.log("deleteError");
 						})
 
 					})
