@@ -15,20 +15,24 @@ $(function(){
 		.done((data) => {
 			let members = data.member;
 			//console.log(members);
+			let body = $("#body");
+			body.empty();
 
 			let appendHtml = "";
-			for(i = 0; i < 1; i++){
-				let member = members[0];
+			
+			for(i = 0; i < members.length; i++){
 				$("#body").prepend(`
-					<div class="container"><div id="memberSection${member.id}" class="panel panel-default"> <div class="panel-heading"><h3 class="panel-title">Member Number: <span id="memberNumber${member.id}">None</h3></div>
+					<div class="container"><div id="memberSection${members[i].id}" class="panel panel-default"> <div class="panel-heading"><h3 class="panel-title">Member Number: <span id="memberNumber${members[i].id}">None</h3></div>
 					<div class="panel-body"><div class="form-inline">
-					<div class="form-group"><label for="nameInput">title</label><input type="text" class="form-control" id="nameInput${member.id}" value=${member.name}></div>
-					<div class="form-group"><label for="emailInput">content</label><input type="text" class="form-control" id="emailInput${member.id}" value=${member.email}></div>
-					<button class="btn btn-primary updatebutton" member_id=${member.id}>Update</button>
-					<button class="btn btn-primary deletebutton" member_id=${member.id}>Delete</button>
+					<div class="form-group"><label for="nameInput">title</label><input type="text" class="form-control" id="nameInput${members[i].id}" value=${members[i].name}></div>
+					<div class="form-group"><label for="emailInput">content</label><input type="text" class="form-control" id="emailInput${members[i].id}" value=${members[i].email}></div>
+					<button class="btn btn-primary updatebutton" member_id=${members[i].id}>Update</button>
+					<button class="btn btn-primary deletebutton" member_id=${members[i].id}>Delete</button>
 					</div></div></div></div>		
-					`)
+					`);
 			}
+
+			body.append(appendHtml);
 
 				//update
 			$(function(){
@@ -60,7 +64,7 @@ $(function(){
 
 
 			//delete
-			$(function(event){
+			$(function(){
 				$(".deletebutton").on("click",function(){
 					let member_id = $(this).attr("member_id");
 					$.ajax({
@@ -74,7 +78,6 @@ $(function(){
 					//alert("hello");
 					$("#memberSection" + member_id).remove();
 				})
-
 			})
 			})
 			
