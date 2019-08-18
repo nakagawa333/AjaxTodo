@@ -1,5 +1,3 @@
-
-
 $(function(){
 	$(".updateButton").on("click",function(){
 		let member_id = $(this).attr("member_id");

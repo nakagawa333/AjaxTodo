@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Member List</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -42,6 +42,7 @@
         <div class="panel-body">
           <div class="form-inline">
             <div class="form-group">
+            	
               <label for="nameInput{{ member.id }}">title</label>
               <input type="text" class="form-control" id="nameInput{{ member.id }}" value="{{ member.name }}">
             </div>
@@ -62,9 +63,9 @@
 
 	{% endfor %}
 </div>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<script src="https://code.jquery.com/jquery.js"></script>
- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="{{ url_for('static', filename='app.js') }}"></script>
 <script src="{{ url_for('static', filename='delete.js') }}"></script>
 <script src="{{ url_for('static', filename='add.js') }}"></script>

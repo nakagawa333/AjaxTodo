@@ -3,7 +3,7 @@ $(function(){
 		let member_id = $(this).attr("member_id");
 
 		$.ajax({
-			url:"delete",
+			url:"/delete",
 			type:"POST",
 			data:{
 				id:member_id
