@@ -14,18 +14,19 @@ $(function(){
 
 		.done((data) => {
 			let members = data.member;
+			console.log(members);
 			//console.log(members);
 			let body = $("#body");
 			body.empty();
 
 			let appendHtml = "";
 			
-			for(i = 0; i < members.length; i++){
-				$("#body").prepend(`
-					<div class="container"><div id="memberSection${members[i].id}" class="panel panel-default"> <div class="panel-heading"><h3 class="panel-title">Member Number: <span id="memberNumber${members[i].id}">None</h3></div>
+			for(i = 0; i <= 2; i++){
+				$("#body").append(`
+					<div class="container"><div id="memberSection${members[i].id}" class="panel panel-default"> <div class="panel-heading"><h3 class="panel-title">No: <span id="memberNumber${members[i].id}">${members[i].id}</h3></div>
 					<div class="panel-body"><div class="form-inline">
-					<div class="form-group"><label for="nameInput">title</label><input type="text" class="form-control" id="nameInput${members[i].id}" value=${members[i].name}></div>
-					<div class="form-group"><label for="emailInput">content</label><input type="text" class="form-control" id="emailInput${members[i].id}" value=${members[i].email}></div>
+					<div class="form-group"><label for="nameInput">title</label><input type="text" class="form-control" id="nameInput${members[i].id}" value="${members[i].name}"></div>
+					<div class="form-group"><label for="emailInput">content</label><input type="text" class="form-control" id="emailInput${members[i].id}" value="${members[i].email}"></div>
 					<button class="btn btn-primary updatebutton" member_id=${members[i].id}>Update</button>
 					<button class="btn btn-primary deletebutton" member_id=${members[i].id}>Delete</button>
 					</div></div></div></div>		

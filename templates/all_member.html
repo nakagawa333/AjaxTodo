@@ -34,67 +34,49 @@
 	</div>
 </nav>
 
-	<div class="container">
-	<h1>Simple Todo</h1>
-
-	<div class="card w-50">
-		<div class="form-group">
-			<label for="">title</label>
-
-			<input type="text" class="form-control" name="name" id="name">
-		</div>
-
-		<div class="form-group">
-			<label for="">content</label>
-
-			<input type="text" class="form-control" name="email" id="email">
-
-		</div>
-		<div class="form-group">
-			 <button type="submit" class="btn btn-danger" id="add">add</button>
-		</div>
-		</div>
-	</div>
-	</div>
-
-	<div id="body">
-	{% for member in members %}
-	<div class="container">
-	<div id="memberSection{{ member.id }}" class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title"> No: <span id="memberNumber{{ member.id }}">{{ member.id }}</span> </h3>
-        </div>
-
-        <div class="panel-body">
-          <div class="form-inline">
-            <div class="form-group">
-            	
-              <label for="nameInput{{ member.id }}">title</label>
-              <input type="text" class="form-control" id="nameInput{{ member.id }}" value="{{ member.name }}">
-            </div>
-
-            <div class="form-group">
-              <label for="emailInput{{ member.id }}">content</label>
-              <input type="email" class="form-control" id="emailInput{{ member.id }}" value="{{ member.email }}">
-            </div>
-
-            <button class="btn btn-primary updateButton" member_id="{{ member.id }}">Update</button>
-
-            <button class="btn btn-primary deleteButton" member_id="{{ member.id }}">Delete</button>
-
-          </div>
-        </div>
-      </div>
-  </div>
-	{% endfor %}
-
-
-</div>
-
+{% for member in members.items %}
 <div class="container">
-	<div class="row">
-		<a type="button" href="/all" class="btn btn-primary btn-lg btn-block">.全てのタスクを見る</a>
+	<div id="memberSection{{ member.id }}" class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title"> No: <span id="memberNumber{{ member.id}}">{{ member.id }}</span></h3>
 </div>
+
+<div class="panel-body">
+	<div class="form-inline">
+		<div class="form-group">
+
+			<label for="nameInput{{ member.id }}"></label>
+			<input type="text" class="form-control" id="nameInput{{ member.id }}" value="{{ member.name }}">
+		</div>
+
+		<div class="form-group">
+			<label for="emailInput{{ member.id }}">content</label>
+			<input type="email" class="form-control" id="emailInput{{ member.id }}" value="{{ member.email }}">
+		</div>
+
+		<button class="btn btn-primary updateButton" member_id="{{ member.id}}">Update</button>
+
+		<button class="btn btn-primary deleteButton" member_id="{{ member.id}}">Delete</button>
+
+	</div>
+</div>
+</div>
+</div>
+
+{% endfor %}
+
+<div class="container mx-auto">
+{% for page_num in members.iter_pages(left_edge=1,right_edge=1, left_current=1,right_current=2) %}
+  {% if page_num %}
+    {% if members.page == page_num %}
+   <a class="btn btn-info mb-4" href="{{ url_for('all',page=page_num) }}"> {{ page_num }}</a>
+    {% else %}
+       <a class="btn btn-outline-info mb-4" href ="{{ url_for('all',page=page_num) }}">{{ page_num}}</a>
+    {% endif %}
+   {% else %}
+      <p>...</p>
+    {% endif %}
+    {% endfor %}
 </div>
 
 
@@ -105,8 +87,6 @@
 <script src="{{ url_for('static', filename='delete.js') }}"></script>
 <script src="{{ url_for('static', filename='add.js') }}"></script>
 <script src="{{ url_for('static', filename='search.js') }}"></script>
-<script src="{{ url_for('static', filename='searchs.js') }}"></script>
 
-	</body>
-	
+</body>
 </html>

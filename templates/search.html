@@ -9,60 +9,23 @@
 
 </head>
 
-<body>
-	<nav class="navbar navbar-default">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarEexample">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="/">Simple Todo</a>
-		</div>
-		
-		<div class="collapse navbar-collapse" id="navbarEexample">
-			<div class="nav navbar-nav" style="display:flex;">
-				  <input type="text" class="form-control"  name="input" id="search-input" placeholder="Search">
 
-				  <button type="submit" class="btn btn-primary" id="searchSubmit">
+<body>
+		
+			<div class="nav navbar-nav" style="display:flex;">
+				  <input type="text" class="form-control"  name="input" id="search_input" placeholder="Search">
+				  
+				  <button type="submit" class="btn btn-primary" id="searchsubmit">
 				  	 <i class="fas fa-search"></i>
 				  </button>
 			</div>
-		</div>
-	</div>
-</nav>
-
-	<div class="container">
-	<h1>Simple Todo</h1>
-
-	<div class="card w-50">
-		<div class="form-group">
-			<label for="">title</label>
-
-			<input type="text" class="form-control" name="name" id="name">
-		</div>
-
-		<div class="form-group">
-			<label for="">content</label>
-
-			<input type="text" class="form-control" name="email" id="email">
-
-		</div>
-		<div class="form-group">
-			 <button type="submit" class="btn btn-danger" id="add">add</button>
-		</div>
-		</div>
-	</div>
-	</div>
 
 	<div id="body">
 	{% for member in members %}
 	<div class="container">
 	<div id="memberSection{{ member.id }}" class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title"> No: <span id="memberNumber{{ member.id }}">{{ member.id }}</span> </h3>
+          <h3 class="panel-title">Member Number: <span id="memberNumber{{ member.id }}">{{ member.random }}</span> </h3>
         </div>
 
         <div class="panel-body">
@@ -86,27 +49,13 @@
         </div>
       </div>
   </div>
+
 	{% endfor %}
-
-
 </div>
-
-<div class="container">
-	<div class="row">
-		<a type="button" href="/all" class="btn btn-primary btn-lg btn-block">.全てのタスクを見る</a>
-</div>
-</div>
-
-
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<script src="{{ url_for('static', filename='app.js') }}"></script>
-<script src="{{ url_for('static', filename='delete.js') }}"></script>
-<script src="{{ url_for('static', filename='add.js') }}"></script>
-<script src="{{ url_for('static', filename='search.js') }}"></script>
-<script src="{{ url_for('static', filename='searchs.js') }}"></script>
+</body>
 
-	</body>
-	
+
 </html>
