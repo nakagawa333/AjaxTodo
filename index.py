@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from random import randint
 from flask_marshmallow import Marshmallow
 from sqlalchemy import or_
-
+import requests
 
 app = Flask(__name__)
 ma = Marshmallow(app)
@@ -34,11 +34,19 @@ def index():
 	members = Member.query.order_by(Member.id.desc()).limit(3)
 	return render_template("index.html",members=members)
 
+@app.route("/limit_all",methods=["POST"])
+def limit_all():
+	members = Member.query.order_by(Member.id.desc()).limit(3)
+	member_schema = MemberSchema(many=True)
+	result = member_schema.dump(members)
+	return jsonify({"members":result})
+
 @app.route("/all",methods=["GET"])
 def all():
 	page = request.args.get("page",1,type=int)
 	members = Member.query.order_by(Member.id.desc()).paginate(page=page,per_page=5)
 	return render_template("all_member.html",members=members)
+
 
 @app.route("/alljson",methods=["POST"])
 def alljson():
@@ -60,19 +68,17 @@ def add():
 	result = member_schema.dump(members)
 	return jsonify({"member":result})
 
-@app.route("/searchs")
-def searchs():
-	members = Member.query.all()
-	return render_template("search.html",members=members)
-
-@app.route("/search",methods=["POST"])
+@app.route("/search",methods=["GET"])
 def search():
-	# members = Member.query.order_by(Member.id.desc()).all()
-	# return render_template("search.html",members=members)
+	req = request.args.get("input")
+	searches = db.session.query(Member).\
+	                                                  filter(or_(\
+	                                                  Member.name.like("%" + req + "%"),\
+	                                                  Member.email.like("%" + req + "%"),\
+	                                                 )).all()
 
-	datas = request.form["datas"]
-	print(datas)
-	return jsonify({"datas":datas})
+	members = Member.query.all()
+	return render_template("search.html",searches=searches)
 
 @app.route("/searches",methods=["POST"])
 def searches():
@@ -82,11 +88,13 @@ def searches():
 	                                                  Member.name.like("%" + req + "%"),\
 	                                                  Member.email.like("%" + req + "%"),\
 	                                                  )).all()
+
 	member_schema = MemberSchema(many=True)
 	result = member_schema.dump(searches)
 	return jsonify({"member":result})
 
-@app.route("/update",methods=["POST"])
+
+@app.route("/update",methods=["PUT"])
 def update():
 	member = Member.query.filter_by(id=request.form["id"]).first()
 	member.name = request.form["name"]
@@ -97,15 +105,26 @@ def update():
 
 	return jsonify({"member_num":member.random,"member_name":member.name,"member_email":member.email})
 
-@app.route("/delete",methods=["POST"])
+@app.route("/delete",methods=["DELETE"])
 def delete():
 	member_id = Member.query.filter_by(id = request.form["id"]).first()
 	member = Member.query.filter_by(id=request.form["id"]).first()
 	db.session.delete(member)
-
 	db.session.commit()
 
-	return jsonify({"result":"sucess"})
+	members = Member.query.order_by(Member.id.desc()).limit(3)
+	member_schema = MemberSchema(many=True)
+	result = member_schema.dump(members)
+	return jsonify({"members":result})
+
+@app.route("/deleteall",methods=["DELETE"])
+def deleteall():
+	 Member.query.delete()
+	 db.session.commit()
+	 total = Member.query.count()
+	 Stringtotal = str(total)
+
+	 return Stringtotal
 
 if __name__ == '__main__':
     app.run(debug=True)

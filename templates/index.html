@@ -7,6 +7,8 @@
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -20,9 +22,11 @@
 				<span class="icon-bar"></span>
 			</button>
 			<a class="navbar-brand" href="/">Simple Todo</a>
+			<button class="navbar" id="deleteAll">全て消す</button>
 		</div>
 		
 		<div class="collapse navbar-collapse" id="navbarEexample">
+			<form action="/search" method="GET">
 			<div class="nav navbar-nav" style="display:flex;">
 				  <input type="text" class="form-control"  name="input" id="search-input" placeholder="Search">
 
@@ -30,6 +34,7 @@
 				  	 <i class="fas fa-search"></i>
 				  </button>
 			</div>
+		</form>
 		</div>
 	</div>
 </nav>
@@ -98,6 +103,7 @@
 </div>
 
 
+
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -106,6 +112,7 @@
 <script src="{{ url_for('static', filename='add.js') }}"></script>
 <script src="{{ url_for('static', filename='search.js') }}"></script>
 <script src="{{ url_for('static', filename='searchs.js') }}"></script>
+<script src="{{ url_for('static', filename='deleteAll.js') }}"></script>
 
 	</body>
 	

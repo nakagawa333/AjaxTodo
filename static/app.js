@@ -7,13 +7,13 @@ $(function(){
 
 		$.ajax({
 			url:"/update",
-			type:"POST",
+			type:"PUT",
 			data: {name:name,email:email,id:member_id}
 		})
 
 		.done((data) => {
             $('#memberSection'+member_id).fadeOut(1000).fadeIn(1000);
-            $('#memberNumber'+member_id).text(data.member_num);
+            // $('#memberNumber'+member_id).text(data.member_num);
 		})
 
 		.fail((data) =>{

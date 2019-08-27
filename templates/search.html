@@ -7,55 +7,61 @@
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
+      <link rel="stylesheet" tyee="text/css" href="static/search/search.css">
 </head>
 
 
 <body>
-		
-			<div class="nav navbar-nav" style="display:flex;">
-				  <input type="text" class="form-control"  name="input" id="search_input" placeholder="Search">
-				  
-				  <button type="submit" class="btn btn-primary" id="searchsubmit">
-				  	 <i class="fas fa-search"></i>
-				  </button>
-			</div>
+
+	<div class="container">
+	<div class="row">
+	<div id="search" style="display:flex;">
+	 <input type="text" class="form-control"  name="input" id="search_input" placeholder="Search">
+	 <button type="submit" class="btn btn-primary" id="searchsubmit">
+	 	<i class="fas fa-search"></i>
+	 </button>
+	</div>
 
 	<div id="body">
-	{% for member in members %}
-	<div class="container">
-	<div id="memberSection{{ member.id }}" class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">Member Number: <span id="memberNumber{{ member.id }}">{{ member.random }}</span> </h3>
-        </div>
+		{% for search in searches %}
+		<div class="container">
+			<div id="memberSection{{ search.id }}" class="panel panel-default">
+				<div class="panel-heading">
+				 <h3 class="panel-title">No:<span id="memNumber{{ search.id }}">{{ search.id }}</span></h3>
+				</div>
 
-        <div class="panel-body">
-          <div class="form-inline">
-            <div class="form-group">
-            	
-              <label for="nameInput{{ member.id }}">title</label>
-              <input type="text" class="form-control" id="nameInput{{ member.id }}" value="{{ member.name }}">
-            </div>
+		<div class="panel-body">
+			<div class="form-inline">
+				<div class="form-group">
 
-            <div class="form-group">
-              <label for="emailInput{{ member.id }}">content</label>
-              <input type="email" class="form-control" id="emailInput{{ member.id }}" value="{{ member.email }}">
-            </div>
+					<lebel for="nameInput{{ search.id}}">title</lebel>
+					<input type="text" class="form-control" id="nameInput{{ search.id }}" value="{{ search.name }}">
+				</div>
 
-            <button class="btn btn-primary updateButton" member_id="{{ member.id }}">Update</button>
+				<div class="form-group">
+					<label for="emailInput{{ search.id }}">content</label>
+					<input type="email" class="form-control" id="emailInput{{ search.id }}" value="{{ search.email }}">
+				</div>
 
-            <button class="btn btn-primary deleteButton" member_id="{{ member.id }}">Delete</button>
+				<button class="btn btn-primary updateButton" member_id="{{ search.id }}">Update</button>
 
-          </div>
-        </div>
-      </div>
-  </div>
-
-	{% endfor %}
+				<button class="btn btn-primary deleteButton" member_id="{{ member_id }}">Delete</button>
+			</div>
+		</div>
+		</div>
+		</div>
+		{% endfor %}
+	</div>
+</div>
 </div>
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<script src="{{ url_for('static', filename='search/search.js') }}"></script>
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+<script src="{{ url_for('static', filename='delete.js') }}"></script>
+
+
+
 </body>
-
-
 </html>

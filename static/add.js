@@ -1,7 +1,29 @@
+$(function(event){
+	$("#add").on("click",function(event){
+		let name = $("#name").val();
+		let email = $("#email").val();
+
+		localStorage.setItem("name",name);
+		let name1 = localStorage.getItem("email");
+		console.log(name)
+	})
+})
+
+
 $(function(){
 	$("#add").on("click",function(){
 		let name = $("#name").val();
 		let email = $("#email").val();
+
+		localStorage.setItem("name",name);
+		let name1 = localStorage.getItem("name");
+		console.log(name1);
+
+		localStorage.setItem("email",email);
+		let email1 = localStorage.getItem("email");
+		console.log(email1);
+
+		$("#name").val(name1);
 
 		$.ajax({
 			url:"/add",
@@ -11,16 +33,13 @@ $(function(){
 				email:email
 			}
 		})
-
 		.done((data) => {
 			let members = data.member;
-			console.log(members);
-			//console.log(members);
 			let body = $("#body");
 			body.empty();
 
 			let appendHtml = "";
-			
+
 			for(i = 0; i <= 2; i++){
 				$("#body").append(`
 					<div class="container"><div id="memberSection${members[i].id}" class="panel panel-default"> <div class="panel-heading"><h3 class="panel-title">No: <span id="memberNumber${members[i].id}">${members[i].id}</h3></div>
@@ -35,16 +54,16 @@ $(function(){
 
 			body.append(appendHtml);
 
-				//update
 			$(function(){
-				$(".updatebutton").on("click",function(event){
+				$(".updatebutton").on("click",function(){
+
 					let member_id = $(this).attr("member_id");
 					let name = $("#nameInput" + member_id).val();
-					let email = $("#emailInput" + member_id).val();	
+					let email = $("#emailInput" + member_id).val();
 
 					$.ajax({
 						url:"/update",
-						type:"POST",
+						type:"PUT",
 						data:{
 							name:name,
 							email:email,
@@ -52,42 +71,21 @@ $(function(){
 						}
 					})
 
-					.done((data) =>{
-					$('#memberSection'+member_id).fadeOut(1000).fadeIn(1000);
-					$('#memberNumber'+member_id).text(data.member_num);
-				})
+					.done(( data) => {
+						$('#memberSection'+member_id).fadeOut(1000).fadeIn(1000);
+					})
 
-					.fail(() =>{
+					.fail(() => {
 						alert("updateError");
 					})
-				});
-			})
 
 
-			//delete
-			$(function(){
-				$(".deletebutton").on("click",function(){
-					let member_id = $(this).attr("member_id");
-					$.ajax({
-						url:"/delete",
-						type:"POST",
-						data:{
-							id:member_id
-						}
-					})
-					.done((data) =>{
-					//alert("hello");
-					$("#memberSection" + member_id).remove();
 				})
 			})
-			})
-			
-		})
 
-		//データベースに新しいデータを保存出来なかった時
-		.fail(() => {
-			alert("Error");
 		})
 	})
 })
+
+
 

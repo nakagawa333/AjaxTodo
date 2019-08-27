@@ -2,6 +2,12 @@ $(function(){
 	$("#searchsubmit").on("click",function(){
 		let req = $("#search_input").val();
 
+		localStorage.setItem("req",req);
+
+		let r = localStorage.getItem("req");
+
+		$("#search_input").val(r);
+
 		$.ajax({
 			url:"/searches",
 			type:"POST",
@@ -19,7 +25,7 @@ $(function(){
 let sucessCallback_search = (data) =>{
 	//history.pushState('','','/search');
 	let members = data.member;
-
+	console.log(members);
 	//検索結果がない場合
 	if(members.length == 0){
 		alert("検索結果がありませんでした。");
@@ -28,7 +34,7 @@ let sucessCallback_search = (data) =>{
 		body.empty();
 
 		let appendHtml = "";
-		for(i = 0 ; i <= 2; i++){
+		for(i = 0 ; i <= members.length; i++){
 		$("#body").append(`
 			<div class="container"><div id="memberSection${members[i].id}" class="panel panel-default"> <div class="panel-heading"><h3 class="panel-title">No: <span id="memberNumber${members[i].id}">${members[i].id}</h3></div>
 			<div class="panel-body"><div class="form-inline">
@@ -38,15 +44,11 @@ let sucessCallback_search = (data) =>{
 			<button class="btn btn-primary deletebutton" member_id=${members[i].id}>Delete</button>
 			</div></div></div></div>		
 			`);
+
 		body.append(appendHtml);
-	   }
 
-	   localStorage.setItem("nakagawa","3");
-
-	   console.log("nakagawa");
-
-	$(function(){
-		$(".updatebutton").on("click",function(){
+	   $(function(){
+		 $(".updatebutton").on("click",function(){
 			let member_id = $(this).attr("member_id");
 			let name = $("#nameInput" + member_id).val();
 			let email = $("#emailInput" + member_id).val();
@@ -61,7 +63,6 @@ let sucessCallback_search = (data) =>{
 				}
 			})
 			.done((data) => {
-				console.log(data);
 				$('#memberSection'+member_id).fadeOut(1000).fadeIn(1000);
 			})
 			.fail(() => {
@@ -69,10 +70,24 @@ let sucessCallback_search = (data) =>{
 			})
 		})
 	})
-}
+
+	}
+	}
 }
 
 let errorCallback_search = () => {
 	console.log("Error");
 }
 
+$(function(){
+	$("#searchsubmitb").on("click",function(){
+		let req = $("#search_input").val();
+
+		localStorage.setItem("req",req);
+
+		let r = localStorage.getItem("req");
+
+		$("#search_input").val(r);
+
+	})
+})
