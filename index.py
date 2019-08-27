@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from random import randint
 from flask_marshmallow import Marshmallow
 from sqlalchemy import or_
-import requests
+
 
 app = Flask(__name__)
 ma = Marshmallow(app)
